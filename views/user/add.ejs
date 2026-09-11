@@ -9,20 +9,12 @@
     <link rel="shortcut icon" href="../img/omar-circle.png" type="image/x-icon">
 
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta
-      name="author"
-      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
-    />
-    <meta name="generator" content="Hugo 0.112.5" />
-    <title>Home page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Add Customer" />
+    <title>Add Customer</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="../css/dark-light.css">
-
-    <!-- Custom styles for this template -->
     <link href="../css/sidebars.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/myStyle.css" />
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
@@ -31,105 +23,120 @@
     <%- include("../Components/loading.ejs") %> 
     <%- include('../Components/dark-light.ejs') %>
 
-
-    <main class="d-flex flex-nowrap">
+    <main class="main-layout">
       <%- include('../Components/sidebar.ejs', {currentPage: "add"}) %>
 
-      <section class="w-100">
+      <section class="content-section">
         <%- include('../Components/navbar.ejs') %>
 
-        <form action="/user/add" method="post" class="mx-0 row gx-3 gy-4 mt-3">
-          <div class="col-md-6">
-            <label for="inputfirstName4" class="form-label">First Name:</label>
-            <input required
-            name="fireName"
-              placeholder="Ali..."
-              type="text"
-              class="form-control"
-              id="inputfirstName4"
-            />
-          </div>
-          <div class="col-md-6">
-            <label for="inputlastName4" class="form-label">Last Name:</label>
-            <input required
-            name="lastName"
-              placeholder="Hassan..."
-              type="text"
-              class="form-control"
-              id="inputlastName4"
-            />
-          </div>
+        <div class="page-container">
+          <!-- Breadcrumb & Header -->
+          <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb mb-1">
+              <li class="breadcrumb-item"><a href="/home" class="text-decoration-none">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Add Customer</li>
+            </ol>
+          </nav>
 
-          <div class="col-md-6">
-            <label for="inputemail4" class="form-label">Email:</label>
-            <input required
-            name="email"
-              placeholder="ali@gmail.com"
-              type="email"
-              class="form-control"
-              id="inputemail4"
-            />
-          </div>
-          <div class="col-md-6">
-            <label for="inputtele4" class="form-label">Telephone:</label>
-            <input required
-            name="phoneNumber"
-              placeholder="011987899"
-              type="number"
-              class="form-control"
-              id="inputtele4"
-            />
-          </div>
-
-          <div>
-            <div class="col-md-6">
-              <label for="inputage4" class="form-label">Age:</label>
-              <input required
-              name="age"
-                placeholder="Your Age: ..."
-                type="number"
-                class="form-control"
-                id="inputage4"
-              />
+          <div class="card-box">
+            <div class="border-bottom pb-3 mb-4">
+              <h2 class="h4 fw-bold mb-1">New Customer Information</h2>
+              <p class="text-secondary small mb-0">Fill in the customer details below to register them.</p>
             </div>
-          </div>
 
-          <div>
-            <div class="col-md-6">
-              <label for="inputCountry" class="form-label">Country:</label>
-              <% 
-                const countries = ["Egypt", "Morocco", "Saudi Arabia", "UAE", "Tunisia", "Algeria", "Jordan", "Lebanon", "Palestine", "Iraq", "Syria", "Yemen", "Kuwait", "Qatar", "Oman", "Bahrain", "Libya", "Sudan"]; 
-              %>
-              <select name="country" id="inputCountry" class="form-select">
-                <option selected disabled hidden>Choose here ...</option>
-                <% countries.forEach(country => { %>
-                  <option value="<%= country %>">
-                    <%= country %>
-                  </option>
-                <% }) %>
-              </select>
-            </div>
-          </div>
+            <form action="/user/add" method="post" class="row g-3">
+              <div class="col-12 col-md-6">
+                <label for="inputfirstName4" class="form-label fw-semibold">First Name <span class="text-danger">*</span></label>
+                <input required
+                  name="fireName"
+                  placeholder="e.g. Ali"
+                  type="text"
+                  class="form-control py-2"
+                  id="inputfirstName4"
+                />
+              </div>
 
-          <div>
-            <div class="col-md-6">
-              <label for="inputGender" class="form-label">Gender:</label>
-              <select name="gender" id="inputGender" class="form-select">
-                <option selected hidden disabled>Choose here ...</option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
-            </div>
-          </div>
+              <div class="col-12 col-md-6">
+                <label for="inputlastName4" class="form-label fw-semibold">Last Name <span class="text-danger">*</span></label>
+                <input required
+                  name="lastName"
+                  placeholder="e.g. Hassan"
+                  type="text"
+                  class="form-control py-2"
+                  id="inputlastName4"
+                />
+              </div>
 
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary">Submit</button>
+              <div class="col-12 col-md-6">
+                <label for="inputemail4" class="form-label fw-semibold">Email Address <span class="text-danger">*</span></label>
+                <input required
+                  name="email"
+                  placeholder="name@example.com"
+                  type="email"
+                  class="form-control py-2"
+                  id="inputemail4"
+                />
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label for="inputtele4" class="form-label fw-semibold">Phone Number <span class="text-danger">*</span></label>
+                <input required
+                  name="phoneNumber"
+                  placeholder="01XXXXXXXXX"
+                  type="tel"
+                  class="form-control py-2"
+                  id="inputtele4"
+                />
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label for="inputage4" class="form-label fw-semibold">Age <span class="text-danger">*</span></label>
+                <input required
+                  name="age"
+                  placeholder="Age"
+                  type="number"
+                  min="1"
+                  max="120"
+                  class="form-control py-2"
+                  id="inputage4"
+                />
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label for="inputCountry" class="form-label fw-semibold">Country <span class="text-danger">*</span></label>
+                <% 
+                  const countries = ["Egypt", "Morocco", "Saudi Arabia", "UAE", "Tunisia", "Algeria", "Jordan", "Lebanon", "Palestine", "Iraq", "Syria", "Yemen", "Kuwait", "Qatar", "Oman", "Bahrain", "Libya", "Sudan"]; 
+                %>
+                <select name="country" id="inputCountry" class="form-select py-2" required>
+                  <option value="" selected disabled hidden>Choose country...</option>
+                  <% countries.forEach(country => { %>
+                    <option value="<%= country %>">
+                      <%= country %>
+                    </option>
+                  <% }) %>
+                </select>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <label for="inputGender" class="form-label fw-semibold">Gender <span class="text-danger">*</span></label>
+                <select name="gender" id="inputGender" class="form-select py-2" required>
+                  <option value="" selected hidden disabled>Choose gender...</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+
+              <div class="col-12 pt-3 border-top mt-4 d-flex flex-wrap gap-2">
+                <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill fw-medium">Save Customer</button>
+                <a href="/home" class="btn btn-outline-secondary px-4 py-2 rounded-pill">Cancel</a>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </section>
     </main>
-    <script src="../js/bootstrap.bundle.min.js"></script>
 
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/sidebars.js"></script>
     <script src="../js/main.js"></script>
   </body>

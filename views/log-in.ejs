@@ -2,41 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login - Customer App</title>
+    <link rel="shortcut icon" href="/img/omar-circle.png" type="image/x-icon">
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div class="container">
-        <form class="form" method="post" action="/login">
-       <p class="form-title">Log in to your account</p>
-        <div class="input-container">
-          <input type="text" placeholder="Enter username" name="userName" required minlength="3">
-      </div>
-      <div class="input-container">
-          <input type="password" placeholder="Enter password" name="password" required minlength="8">
-        </div>
-         <button type="submit" class="submit" id="submit">
-        log in
-      </button>
+        <form class="form" method="post" action="/login" id="login-form">
+          <div style="text-align: center; margin-bottom: 0.5rem;">
+            <span style="font-size: 2.2rem;">⚡</span>
+          </div>
+          <p class="form-title">Welcome Back</p>
+          <p style="text-align: center; color: #94a3b8; font-size: 0.875rem; margin: -0.25rem 0 1rem 0;">Log in to access your dashboard</p>
 
-      <p class="signup-link">
-        No account?
-        <a href="/signup">Sign up</a>
-      </p>
-   </form>
-   </div>
-   <script>
-    const form = document.getElementById("signup-form");
-    const button = document.getElementById("submit");
-    form.addEventListener("submit", (e) => {
-        
-        button.innerHTML = "Please Wait...";
-        button.style.color = "white";
-        button.style.backgroundColor = "#0275d8";
-        
-        button.disabled = true;
-    });
-   </script>
+          <div class="input-container">
+            <input type="text" placeholder="Enter username" name="userName" required minlength="3" autocomplete="username">
+          </div>
+          <div class="input-container">
+            <input type="password" placeholder="Enter password" name="password" required minlength="8" autocomplete="current-password">
+          </div>
+          <button type="submit" class="submit" id="submit">
+            Log In
+          </button>
+
+          <p class="signup-link">
+            Don't have an account?
+            <a href="/signup">Sign up</a>
+          </p>
+       </form>
+    </div>
+    <script>
+      const form = document.getElementById("login-form");
+      const button = document.getElementById("submit");
+      if (form && button) {
+        form.addEventListener("submit", (e) => {
+          button.innerHTML = "Logging in...";
+          button.disabled = true;
+        });
+      }
+    </script>
 </body>
 </html>

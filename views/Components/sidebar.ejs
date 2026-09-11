@@ -89,7 +89,7 @@
 </script>
 
 <style>
-  /* Sidebar uses the website background and border variables */
+  /* Base Desktop Navigation Rail */
   .m3-nav-rail {
     font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     width: 82px;
@@ -103,7 +103,7 @@
     padding: 14px 0 18px 0;
     box-sizing: border-box;
     user-select: none;
-    z-index: 100;
+    z-index: 1030;
     transition: background-color 0.25s ease, border-color 0.25s ease;
   }
 
@@ -242,8 +242,8 @@
   }
 
   .m3-user-avatar {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid var(--bs-primary);
@@ -272,5 +272,92 @@
     border-color: #dc3545 !important;
     color: #dc3545 !important;
     transform: scale(1.08) !important;
+  }
+
+  /* ================= Mobile & Responsive Adaptations (< 768px) ================= */
+  @media (max-width: 767.98px) {
+    .b-example-divider, .b-example-vr {
+      display: none !important;
+    }
+
+    .m3-nav-rail {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: auto;
+      width: 100%;
+      min-width: 100%;
+      height: 64px;
+      min-height: 64px;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      padding: 4px 12px;
+      border-right: none;
+      border-top: 1px solid var(--bs-border-color);
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+      z-index: 1040;
+    }
+
+    .m3-icon-btn.search-btn {
+      display: none; /* Already available in the top navbar */
+    }
+
+    .m3-nav-items {
+      flex-direction: row;
+      justify-content: space-around;
+      width: auto;
+      flex: 1;
+      gap: 4px;
+    }
+
+    .m3-nav-item {
+      width: auto;
+      padding: 0 8px;
+    }
+
+    .m3-nav-item .m3-icon-wrapper {
+      width: 46px;
+      height: 28px;
+    }
+
+    .m3-nav-item .m3-icon-wrapper .material-symbols-outlined {
+      font-size: 20px;
+    }
+
+    .m3-label {
+      font-size: 10px;
+    }
+
+    .m3-nav-bottom {
+      margin-top: 0;
+      flex-direction: row;
+      gap: 8px;
+      width: auto;
+    }
+
+    .m3-user-name {
+      display: none; /* Hide name on mobile to save precious screen space */
+    }
+
+    .m3-user-profile {
+      padding: 0;
+      max-width: 36px;
+    }
+
+    .m3-user-avatar {
+      width: 34px;
+      height: 34px;
+    }
+
+    .m3-icon-circle-btn {
+      width: 34px;
+      height: 34px;
+    }
+
+    .m3-icon-circle-btn .material-symbols-outlined {
+      font-size: 18px;
+    }
   }
 </style>

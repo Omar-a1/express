@@ -51,59 +51,83 @@
   font-size: 1.9rem;
 }
 
-
-/* SIDEBAR */
-.sidebar{
-  width: 280px;
-  transition: 0.3s;
+/* ================= Global Layout & Responsiveness ================= */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
-.small-sidebar{
-  width: 77px;
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
-.small-sidebar .sidebar-text{
-  display: none;
+.content-section {
+  flex: 1;
+  min-width: 0; /* Prevents flex children from overflowing */
+  display: flex;
+  flex-direction: column;
 }
 
-
-/* Logo */
-.bi-lightning-charge{
- 
-  transition: 1s;
-  margin-top: 0.5rem;
+.page-container {
+  padding: 1.5rem 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.small-sidebar .bi-lightning-charge{
- 
-  margin-top: 2.5rem;
+/* Card Wrappers for tables and forms */
+.card-box {
+  background-color: var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-
-.small-sidebar .bi-x-circle::before {
-  content: "\F134";
-  transition: 1s;
+[data-bs-theme="dark"] .card-box {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
-
-.small-sidebar .bi-lightning-charge::before {
-  content: "\F46C";
-  transform: rotateY(360deg);
-  transition: 1s;
-  margin-left: 0.55rem;
+/* Responsive Tables */
+.table-responsive-custom {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0.75rem;
+  border: 1px solid var(--bs-border-color);
+  background-color: var(--bs-body-bg);
 }
 
-
-
-.bi-x-circle{
-  font-size: 1.4rem;
-  transition: 0.25s;
-  color: #adb5bd;
+.table-responsive-custom table {
+  margin-bottom: 0 !important;
+  white-space: nowrap;
 }
 
+.table-responsive-custom th,
+.table-responsive-custom td {
+  vertical-align: middle;
+  padding: 0.85rem 1rem;
+}
 
-.bi-x-circle:hover{
-  font-size: 1.5rem;
- 
-  color: #fff;
+/* Mobile Adjustments */
+@media (max-width: 767.98px) {
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .content-section {
+    padding-bottom: 74px; /* Space for fixed bottom navigation rail */
+  }
+
+  .page-container {
+    padding: 1rem 0.75rem;
+  }
+
+  .card-box {
+    padding: 1rem 0.85rem;
+    border-radius: 0.85rem;
+  }
 }
