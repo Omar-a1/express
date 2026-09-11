@@ -1,0 +1,276 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<aside id="sidebarId" class="m3-nav-rail">
+  <!-- Top Search Button (Focuses search bar in navbar) -->
+  <button class="m3-icon-btn search-btn" type="button" onclick="focusSearch()" title="Search">
+    <span class="material-symbols-outlined">search</span>
+  </button>
+
+  <!-- Navigation Items -->
+  <nav class="m3-nav-items">
+    <a href="/home" class="m3-nav-item <%= currentPage === 'index' ? 'active' : '' %>">
+      <div class="m3-icon-wrapper">
+        <span class="material-symbols-outlined">home</span>
+      </div>
+      <span class="m3-label">Home</span>
+    </a>
+
+    <a href="/user/add" class="m3-nav-item <%= currentPage === 'add' ? 'active' : '' %>">
+      <div class="m3-icon-wrapper">
+        <span class="material-symbols-outlined">person_add</span>
+      </div>
+      <span class="m3-label">Add User</span>
+    </a>
+  </nav>
+
+  <!-- Bottom User Profile & Theme Toggle -->
+  <div class="m3-nav-bottom">
+    <button class="m3-icon-circle-btn" type="button" onclick="toggleTheme()" id="sidebarThemeBtn" title="Toggle Light / Dark theme">
+      <span class="material-symbols-outlined" id="sidebarThemeIcon">dark_mode</span>
+    </button>
+
+    <% if (currentUser) { %>
+      <div class="m3-user-profile" title="<%= currentUser.userName %>">
+        <img 
+          src="<%= currentUser.profileImage || 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png' %>" 
+          alt="<%= currentUser.userName %>" 
+          class="m3-user-avatar"
+          onerror="this.src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'"
+        />
+        <span class="m3-user-name"><%= currentUser.userName %></span>
+      </div>
+
+      <!-- Logout Button -->
+      <button class="m3-icon-circle-btn logout-btn" type="button" onclick="handleLogout()" title="Log Out">
+        <span class="material-symbols-outlined">logout</span>
+      </button>
+    <% } %>
+  </div>
+</aside>
+
+<div class="b-example-divider b-example-vr"></div>
+
+<script>
+  function focusSearch() {
+    const searchInput = document.querySelector('input[name="searchText"]');
+    if (searchInput) {
+      searchInput.focus();
+    }
+  }
+
+  function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-bs-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateSidebarThemeIcon(newTheme);
+  }
+
+  function updateSidebarThemeIcon(theme) {
+    const icon = document.getElementById('sidebarThemeIcon');
+    if (icon) {
+      icon.textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
+    }
+  }
+
+  function handleLogout() {
+    // حذف بيانات المستخدم وحالته من الـ localStorage
+    localStorage.removeItem("statue");
+    localStorage.removeItem("status");
+    localStorage.removeItem("user");
+    // التوجيه إلى مسار تسجيل الخروج لمسح الكوكيز
+    window.location.href = "/logout";
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentTheme = document.documentElement.getAttribute('data-bs-theme') || localStorage.getItem('theme') || 'light';
+    updateSidebarThemeIcon(currentTheme);
+  });
+</script>
+
+<style>
+  /* Sidebar uses the website background and border variables */
+  .m3-nav-rail {
+    font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    width: 82px;
+    min-width: 82px;
+    min-height: 100vh;
+    background-color: var(--bs-body-bg);
+    border-right: 1px solid var(--bs-border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 0 18px 0;
+    box-sizing: border-box;
+    user-select: none;
+    z-index: 100;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+  }
+
+  /* Search button at the top */
+  .m3-icon-btn.search-btn {
+    background-color: var(--bs-tertiary-bg);
+    color: var(--bs-body-color);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 16px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 14px;
+    transition: all 0.2s ease;
+  }
+
+  .m3-icon-btn.search-btn:hover {
+    background-color: var(--bs-secondary-bg);
+    transform: scale(1.05);
+  }
+
+  /* Navigation items list */
+  .m3-nav-items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* Single Nav Item */
+  .m3-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none !important;
+    color: var(--bs-secondary-color);
+    gap: 4px;
+    width: 100%;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  /* Icon pill indicator */
+  .m3-icon-wrapper {
+    width: 56px;
+    height: 32px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .m3-icon-wrapper .material-symbols-outlined {
+    font-size: 22px;
+    transition: transform 0.2s;
+  }
+
+  .m3-nav-item:hover {
+    color: var(--bs-body-color);
+  }
+
+  .m3-nav-item:hover .m3-icon-wrapper {
+    background-color: var(--bs-tertiary-bg);
+  }
+
+  .m3-nav-item:hover .material-symbols-outlined {
+    transform: scale(1.1);
+  }
+
+  /* Active State (M3 Pill Indicator) */
+  .m3-nav-item.active {
+    color: var(--bs-body-color);
+    font-weight: 600;
+  }
+
+  .m3-nav-item.active .m3-icon-wrapper {
+    background-color: var(--bs-primary-border-subtle, rgba(113, 44, 249, 0.25));
+    color: var(--bs-primary);
+  }
+
+  /* Text label below icon */
+  .m3-label {
+    font-size: 11px;
+    font-weight: 500;
+    font-family: inherit;
+    text-align: center;
+    line-height: 14px;
+  }
+
+  /* Bottom Actions */
+  .m3-nav-bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .m3-icon-circle-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--bs-border-color);
+    background-color: var(--bs-tertiary-bg);
+    color: var(--bs-body-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .m3-icon-circle-btn .material-symbols-outlined {
+    font-size: 20px;
+  }
+
+  .m3-icon-circle-btn:hover {
+    background-color: var(--bs-secondary-bg);
+    border-color: var(--bs-primary);
+    transform: rotate(20deg);
+  }
+
+  /* User Profile inside sidebar */
+  .m3-user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 0;
+    max-width: 72px;
+  }
+
+  .m3-user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--bs-primary);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease;
+  }
+
+  .m3-user-avatar:hover {
+    transform: scale(1.08);
+  }
+
+  .m3-user-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--bs-body-color);
+    text-align: center;
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Logout button styling */
+  .logout-btn:hover {
+    background-color: rgba(220, 53, 69, 0.15) !important;
+    border-color: #dc3545 !important;
+    color: #dc3545 !important;
+    transform: scale(1.08) !important;
+  }
+</style>

@@ -1,0 +1,138 @@
+/* 1. استيراد خط Google Sans Flex من جوجل كاحتياط */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+/* 2. تعريف الخط المحلي الموجود في مجلد public */
+@font-face {
+  font-family: 'Google Sans Flex';
+  src: url('/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.woff2') format('woff2-variations'),
+       url('/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 3. تطبيق الخط على كل عناصر صفحة المصادقة مع استثناء الأيقونات */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+*:not(.material-symbols-outlined):not(.material-symbols-rounded):not(.material-symbols-sharp):not([class^="bi-"]):not([class*=" bi-"]) {
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #0f172a;
+}
+
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.form {
+  background-color: #1e293b; /* بطاقة النموذج بلون سلايت عصري */
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+.form-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #f8fafc;
+  margin: 0 0 0.5rem 0;
+}
+
+.input-container {
+  width: 100%;
+}
+
+.input-container input {
+  font-family: inherit;
+  background-color: #0f172a; /* حقول إدخال داكنة متناسقة */
+  color: #f1f5f9;
+  outline: none;
+  border: 1px solid #334155;
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+  width: 100%;
+  border-radius: 0.6rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-container input::placeholder {
+  color: #64748b;
+}
+
+.input-container input:focus {
+  border-color: #6366f1; /* توهج بنفسجي أنيق عند التركيز */
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+.submit {
+  display: block;
+  padding: 0.85rem 1.25rem;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: inherit;
+  width: 100%;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  /* box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35); */
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.submit:hover {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  transform: translateY(-1px);
+  /* box-shadow: 0 6px 16px rgba(79, 70, 229, 0.45); */
+}
+
+.submit:active {
+  transform: translateY(0);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.signup-link {
+  color: #94a3b8;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.signup-link a {
+  color: #818cf8;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.signup-link a:hover {
+  color: #a5b4fc;
+  text-decoration: underline;
+}

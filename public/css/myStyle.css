@@ -1,0 +1,109 @@
+/* 1. استيراد خط Google Sans Flex كاحتياط */
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap');
+
+/* 2. تعريف الخط المحلي من مجلد public */
+@font-face {
+  font-family: 'Google Sans Flex';
+  src: url('/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.woff2') format('woff2-variations'),
+       url('/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.woff2') format('woff2');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 3. تطبيق الخط على متغيرات Bootstrap */
+:root {
+  --bs-font-sans-serif: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bs-body-font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* 4. تطبيق الخط على كافة العناصر ما عدا كلاسات الأيقونات */
+*:not(.material-symbols-outlined):not(.material-symbols-rounded):not(.material-symbols-sharp):not([class^="bi-"]):not([class*=" bi-"]) {
+  font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+/* Ensure Material Symbols and Bootstrap Icons keep their icon font */
+.material-symbols-outlined,
+.material-symbols-rounded,
+.material-symbols-sharp {
+  font-family: 'Material Symbols Outlined' !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+[class^="bi-"]::before, [class*=" bi-"]::before {
+  font-family: bootstrap-icons !important;
+}
+
+.bi-lightning-charge::before{
+  margin-right: 1rem;
+  font-size: 1.9rem;
+}
+
+
+/* SIDEBAR */
+.sidebar{
+  width: 280px;
+  transition: 0.3s;
+}
+
+.small-sidebar{
+  width: 77px;
+}
+
+.small-sidebar .sidebar-text{
+  display: none;
+}
+
+
+/* Logo */
+.bi-lightning-charge{
+ 
+  transition: 1s;
+  margin-top: 0.5rem;
+}
+
+.small-sidebar .bi-lightning-charge{
+ 
+  margin-top: 2.5rem;
+}
+
+
+.small-sidebar .bi-x-circle::before {
+  content: "\F134";
+  transition: 1s;
+}
+
+
+.small-sidebar .bi-lightning-charge::before {
+  content: "\F46C";
+  transform: rotateY(360deg);
+  transition: 1s;
+  margin-left: 0.55rem;
+}
+
+
+
+.bi-x-circle{
+  font-size: 1.4rem;
+  transition: 0.25s;
+  color: #adb5bd;
+}
+
+
+.bi-x-circle:hover{
+  font-size: 1.5rem;
+ 
+  color: #fff;
+}

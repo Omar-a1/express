@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="../js/color-modes.js"></script>
+    <link
+      rel="stylesheet"
+      href="../bootstrap-icons-1.10.5/font/bootstrap-icons.min.css"
+    />
+    <link rel="shortcut icon" href="../img/omar-circle.png" type="image/x-icon">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Hugo 0.112.5" />
+    <title>Edit page</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../css/dark-light.css">
+
+
+    <!-- Custom styles for this template -->
+    <link href="../css/sidebars.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/myStyle.css" />
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+  </head>
+  <body>
+    <%- include("../Components/loading.ejs") %> 
+    <%- include('../Components/dark-light.ejs') %>
+
+    <main class="d-flex flex-nowrap">
+      <%- include('../Components/sidebar.ejs', {currentPage: "edit"}) %>
+
+
+      <section class="w-100">
+        <%- include('../Components/navbar.ejs') %>
+
+
+        <nav class="px-2 mt-4 d-flex flex-wrap justify-content-between" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><%= user.fireName %> <%= user.lastName %></li>
+          </ol>
+
+
+          <p class="me-md-5"> <span class="fw-medium fs-6">Id :</span> <%= user._id %></p>
+        </nav>
+
+        <form action="/edit/<%= user._id %>?_method=PUT" method="post" class="mx-0 row gx-3 gy-4 mt-2">
+          <div class="col-md-6">
+            <label for="inputfirstName4" class="form-label">First Name:</label>
+            <input
+              name="fireName"
+              placeholder="Ali..."
+              type="text"
+              class="form-control"
+              id="inputfirstName4"
+              value="<%= user.fireName %>"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputlastName4" class="form-label">Last Name:</label>
+            <input
+              name="lastName"
+              placeholder="Hassan..."
+              type="text"
+              class="form-control"
+              id="inputlastName4"
+              value="<%= user.lastName %>"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputemail4" class="form-label">Email:</label>
+            <input
+              name="email"
+              placeholder="ali@gmail.com"
+              type="email"
+              class="form-control"
+              id="inputemail4"
+              value="<%= user.email %>"
+            />
+          </div>
+          <div class="col-md-6">
+            <label for="inputtele4" class="form-label">Telephone:</label>
+            <input
+              name="phoneNumber"
+              placeholder="011987899"
+              type="number"
+              class="form-control"
+              id="inputtele4"
+              value="<%= user.phoneNumber %>"
+            />
+          </div>
+
+          <div>
+            <div class="col-md-6">
+              <label for="inputage4" class="form-label">Age:</label>
+              <input
+                name="age"
+                placeholder="Your Age: ..."
+                type="number"
+                class="form-control"
+                id="inputage4"
+                value="<%= user.age %>"
+              />
+            </div>
+          </div>
+
+          <div>
+            <div class="col-md-6">
+              <label for="inputCountry" class="form-label">Country:</label>
+                <% 
+                  const countries = ["Egypt", "Morocco", "Saudi Arabia", "UAE", "Tunisia", "Algeria", "Jordan", "Lebanon", "Palestine", "Iraq", "Syria", "Yemen", "Kuwait", "Qatar", "Oman", "Bahrain", "Libya", "Sudan"]; 
+                %>
+                <select name="country" id="inputCountry" class="form-select">
+                  <option disabled>Choose here ...</option>
+                  <% countries.forEach(country => { %>
+                    <option value="<%= country %>" <%= user.country === country ? 'selected' : '' %>>
+                      <%= country %>
+                    </option>
+                  <% }) %>
+                </select>
+            </div>
+          </div>
+
+          <div>
+            <div class="col-md-6">
+              <label for="inputGender" class="form-label">Gender:</label>
+              <select name="gender" id="inputGender" class="form-select">
+                <option disabled>Choose here ...</option>
+                <option <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                <option <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">
+              Update changes
+            </button>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              type="button"
+              class="btn btn-danger"
+            >
+              Delete Customer
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Delete Customer
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">Are you sure you want to continue delete the customer?</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <form action="/edit/<%= user._id %>?_method=DELETE" method="post">
+                <button type="submit" class="btn btn-danger">
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+
+    <script src="../js/sidebars.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
