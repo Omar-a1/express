@@ -18,7 +18,10 @@ app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.static("public"));
 
-app.set("view engine", "ejs");
+const path = require('path');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 app.locals.moment = moment;
 
 // Middleware to make currentUser available in all EJS templates
@@ -38,19 +41,25 @@ app.use(async (req, res, next) => {
 
 app.use("/" , router);
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log("Connected to MongoDB successfully!");
-    app.listen(port, () => {
-      console.log(`Server running at http://localhost:${port}`);
-    });
-  })
-  .catch((err) => {
-    console.log("Failed to connect to MongoDB:", err);
-  });
-module.exports = app;
 // 404 Error page (Must be the last middleware)
 app.use((req, res) => {
   res.render("user/error", { err: "We couldn't find this page pls try another url" });
 });
+
+if (process.env.MONGO_URI) {
+  mongoose
+    .connect(process.env.MONGO_URI)
+    .then(() => {
+      console.log("Connected to MongoDB successfully!");
+      if (process.env.NODE_ENV !== "production") {
+        app.listen(port, () => {
+          console.log(`Server running at http://localhost:${port}`);
+        });
+      }
+    })
+    .catch((err) => {
+      console.log("Failed to connect to MongoDB:", err);
+    });
+}
+
+module.exports = app;
