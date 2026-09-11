@@ -148,8 +148,21 @@ router.post("/user/add", (req, res) => {
 // POST Requst
 router.post("/search", (req, res) => {
   const searchText = (req.body.searchText || "").trim();
-  const searchRegex = new RegExp(searchText, "i");
-  User.find({ $or: [{ fireName: searchRegex }, { lastName: searchRegex }] })
+  if (!searchText) {
+    return res.render("user/search", { arr: [] });
+  }
+
+  // Split the search into words to match full names (e.g. "Omar Abdallah")
+  const words = searchText.split(/\s+/).filter(Boolean);
+  const wordConditions = words.map((word) => {
+    const reg = new RegExp(word, "i");
+    return { $or: [{ fireName: reg }, { lastName: reg }] };
+  });
+
+  // Query: must match each typed word across fireName or lastName
+  const query = { $and: wordConditions };
+
+  User.find(query)
     .then((result) => {
       res.render("user/search", { arr: result });
     })

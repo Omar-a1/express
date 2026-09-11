@@ -24,6 +24,7 @@ app.set('view engine', 'ejs');
 
 app.locals.moment = moment;
 
+
 // Ensure MongoDB connection middleware for Serverless (Vercel) & Local
 let isConnected = false;
 const connectDB = async () => {
