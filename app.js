@@ -24,6 +24,31 @@ app.set('view engine', 'ejs');
 
 app.locals.moment = moment;
 
+// Ensure MongoDB connection middleware for Serverless (Vercel) & Local
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected || mongoose.connection.readyState === 1) {
+    isConnected = true;
+    return;
+  }
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI is not defined in environment variables");
+  }
+  await mongoose.connect(process.env.MONGO_URI);
+  isConnected = true;
+  console.log("Connected to MongoDB successfully!");
+};
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error("MongoDB Connection Error:", err);
+    return res.status(500).send("Database Connection Error: " + err.message);
+  }
+});
+
 // Middleware to make currentUser available in all EJS templates
 app.use(async (req, res, next) => {
   if (req.cookies && req.cookies.userId) {
@@ -46,20 +71,14 @@ app.use((req, res) => {
   res.render("user/error", { err: "We couldn't find this page pls try another url" });
 });
 
-if (process.env.MONGO_URI) {
-  mongoose
-    .connect(process.env.MONGO_URI)
-    .then(() => {
-      console.log("Connected to MongoDB successfully!");
-      if (process.env.NODE_ENV !== "production") {
-        app.listen(port, () => {
-          console.log(`Server running at http://localhost:${port}`);
-        });
-      }
-    })
-    .catch((err) => {
-      console.log("Failed to connect to MongoDB:", err);
+if (process.env.NODE_ENV !== "production") {
+  connectDB().then(() => {
+    app.listen(port, () => {
+      console.log(`Server running at http://localhost:${port}`);
     });
+  }).catch((err) => {
+    console.error("Failed to connect to MongoDB locally:", err);
+  });
 }
 
 module.exports = app;
