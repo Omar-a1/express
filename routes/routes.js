@@ -106,7 +106,10 @@ router.get("/edit/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);
-    res.render("user/edit", { user: User });
+    if (!user) {
+      return res.render("user/error", { err: "User not found" });
+    }
+    res.render("user/edit", { user: user });
   } catch (err) {
     res.render("user/error", { err: "User not found" });
   }
@@ -117,7 +120,10 @@ router.get("/view/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const user = await User.findById(id);
-    res.render("user/view", { user: User });
+    if (!user) {
+      return res.render("user/error", { err: "User not found" });
+    }
+    res.render("user/view", { user: user });
 
   } catch (err) {
     res.render("user/error", { err: "User not found" });
@@ -141,14 +147,15 @@ router.post("/user/add", (req, res) => {
 // search 
 // POST Requst
 router.post("/search", (req, res) => {
-  const searchText = req.body.searchText.trim();
-  const lowerSearch = searchText.toLowerCase()
-  User.find({ $or: [{ fireName: lowerSearch }, { lastName: lowerSearch }] })
+  const searchText = (req.body.searchText || "").trim();
+  const searchRegex = new RegExp(searchText, "i");
+  User.find({ $or: [{ fireName: searchRegex }, { lastName: searchRegex }] })
     .then((result) => {
       res.render("user/search", { arr: result });
     })
     .catch((err) => {
       console.log(err);
+      res.render("user/search", { arr: [] });
     });
 });
 

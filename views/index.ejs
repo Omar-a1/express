@@ -57,13 +57,13 @@
           <td><%= moment(item.updatedAt).fromNow() %> </td>
           <td>
             <div class="d-inline-flex gap-1 align-items-center">
-              <a class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center" href="./view/<%= item._id %>" title="View" style="width: 32px; height: 32px; padding: 0;">
+              <a class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center" href="/view/<%= item._id %>" title="View" style="width: 32px; height: 32px; padding: 0;">
                 <lord-icon src="https://cdn.lordicon.com/vfczflna.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"
                   style="width:20px;height:20px">
                 </lord-icon>
               </a>
 
-              <a class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center" href="./edit/<%= item._id %>" title="Edit" style="width: 32px; height: 32px; padding: 0;">
+              <a class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center" href="/edit/<%= item._id %>" title="Edit" style="width: 32px; height: 32px; padding: 0;">
                 <lord-icon src="https://cdn.lordicon.com/wuvorxbv.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"
                   style="width:20px;height:20px">
                 </lord-icon>

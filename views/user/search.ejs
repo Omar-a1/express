@@ -38,11 +38,11 @@
       <section class="w-100">
         <%- include('../Components/navbar.ejs') %>
 
+        <% if (arr && arr.length > 0) { %>
         <table
           style="width: 99%"
           class="text-center mx-auto table mt-5 table-striped table-bordered"
         >
-          <% if (arr && arr.length > 0) { %>
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -62,41 +62,41 @@
               <td><%= item.country %> </td>
 
               <td>
-            <div class="d-inline-flex gap-1 align-items-center">
-              <a class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center" href="./view/<%= item._id %>" title="View" style="width: 32px; height: 32px; padding: 0;">
-                <lord-icon src="https://cdn.lordicon.com/vfczflna.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"
-                  style="width:20px;height:20px">
-                </lord-icon>
-              </a>
+                <div class="d-inline-flex gap-1 align-items-center">
+                  <a class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center" href="/view/<%= item._id %>" title="View" style="width: 32px; height: 32px; padding: 0;">
+                    <lord-icon src="https://cdn.lordicon.com/vfczflna.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"
+                      style="width:20px;height:20px">
+                    </lord-icon>
+                  </a>
 
-              <a class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center" href="./edit/<%= item._id %>" title="Edit" style="width: 32px; height: 32px; padding: 0;">
-                <lord-icon src="https://cdn.lordicon.com/wuvorxbv.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"
-                  style="width:20px;height:20px">
-                </lord-icon>
-              </a>
+                  <a class="btn btn-primary btn-sm d-inline-flex align-items-center justify-content-center" href="/edit/<%= item._id %>" title="Edit" style="width: 32px; height: 32px; padding: 0;">
+                    <lord-icon src="https://cdn.lordicon.com/wuvorxbv.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"
+                      style="width:20px;height:20px">
+                    </lord-icon>
+                  </a>
 
-              <form action="/edit/<%= item._id %>?_method=DELETE" method="post" class="d-inline m-0">
-                <button class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" title="Delete" style="width: 32px; height: 32px; padding: 0;">
-                  <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"
-                    style="width:20px;height:20px">
-                  </lord-icon>
-                </button>
-              </form>
-            </div>
-          </td>
+                  <form action="/edit/<%= item._id %>?_method=DELETE" method="post" class="d-inline m-0">
+                    <button class="btn btn-danger btn-sm d-inline-flex align-items-center justify-content-center" title="Delete" style="width: 32px; height: 32px; padding: 0;">
+                      <lord-icon src="https://cdn.lordicon.com/jmkrnisz.json" trigger="hover" colors="primary:#ffffff,secondary:#ffffff"
+                        style="width:20px;height:20px">
+                      </lord-icon>
+                    </button>
+                  </form>
+                </div>
+              </td>
             </tr>
             <% }) %>
-            <% } else { %>
-            <div class="alert alert-info text-center w-50 mx-auto mt-5" role="alert">
-              <img src="../img/undraw_looking-for-answers_5p23.svg" alt="" width="15%" height="15%">
-              <br>
-              User not found
-              <br>
-              <a class="btn btn-primary mt-2" href="../user/add">Add Customers</a>
-            </div>
-            <% } %>
           </tbody>
         </table>
+        <% } else { %>
+        <div class="alert alert-info text-center w-50 mx-auto mt-5" role="alert">
+          <img src="/img/undraw_looking-for-answers_5p23.svg" alt="" width="15%" height="15%">
+          <br>
+          User not found
+          <br>
+          <a class="btn btn-primary mt-2" href="/user/add">Add Customers</a>
+        </div>
+        <% } %>
       </section>
     </main>
     <script src="../js/bootstrap.bundle.min.js"></script>

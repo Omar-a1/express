@@ -71,7 +71,7 @@ app.use((req, res) => {
   res.render("user/error", { err: "We couldn't find this page pls try another url" });
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "production" && require.main === module) {
   connectDB().then(() => {
     app.listen(port, () => {
       console.log(`Server running at http://localhost:${port}`);
