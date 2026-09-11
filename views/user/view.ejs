@@ -21,15 +21,14 @@
   </head>
   <body>
     <%- include("../Components/loading.ejs") %> 
-    <%- include('../Components/dark-light.ejs') %>
 
-    <main class="main-layout">
+    <main class="d-flex flex-nowrap">
       <%- include('../Components/sidebar.ejs', {currentPage: "view"}) %>
 
-      <section class="content-section">
+      <section class="w-100 min-vh-100 d-flex flex-column">
         <%- include('../Components/navbar.ejs') %>
 
-        <div class="page-container">
+        <div class="px-4 py-4" style="max-width: 1100px; width: 100%;">
           <!-- Breadcrumb & Header info -->
           <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
             <nav aria-label="breadcrumb">
@@ -43,65 +42,63 @@
             </div>
           </div>
 
-          <div class="card-box">
-            <div class="d-flex flex-wrap justify-content-between align-items-center border-bottom pb-3 mb-4 gap-2">
-              <div>
-                <h2 class="h4 fw-bold mb-1"><%= user.fireName %> <%= user.lastName %></h2>
-                <span class="badge <%= user.gender === 'Male' ? 'bg-primary-subtle text-primary' : 'bg-danger-subtle text-danger' %> px-2.5 py-1 rounded-pill">
-                  <%= user.gender %>
-                </span>
-              </div>
-              <div class="d-flex gap-2">
-                <a href="/edit/<%= user._id %>" class="btn btn-outline-primary px-3 py-2 rounded-pill d-inline-flex align-items-center gap-1">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
-                  <span>Edit</span>
-                </a>
-                <a href="/home" class="btn btn-secondary px-3 py-2 rounded-pill">Back to list</a>
-              </div>
+          <div class="d-flex flex-wrap justify-content-between align-items-center border-bottom pb-3 mb-4 gap-2">
+            <div>
+              <h2 class="h4 fw-bold mb-1"><%= user.fireName %> <%= user.lastName %></h2>
+              <span class="badge <%= user.gender === 'Male' ? 'bg-primary-subtle text-primary' : 'bg-danger-subtle text-danger' %> px-2.5 py-1 rounded-pill">
+                <%= user.gender %>
+              </span>
             </div>
+            <div class="d-flex gap-2">
+              <a href="/edit/<%= user._id %>" class="btn btn-outline-primary px-3 py-2 rounded-pill d-inline-flex align-items-center gap-1">
+                <span class="material-symbols-outlined" style="font-size: 18px;">edit</span>
+                <span>Edit</span>
+              </a>
+              <a href="/home" class="btn btn-secondary px-3 py-2 rounded-pill">Back to list</a>
+            </div>
+          </div>
 
-            <div class="table-responsive-custom">
-              <table class="table table-hover align-middle mb-0">
-                <tbody>
-                  <tr>
-                    <th scope="row" style="width: 25%;" class="text-muted fw-semibold">First Name</th>
-                    <td class="fw-medium"><%= user.fireName %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-muted fw-semibold">Last Name</th>
-                    <td class="fw-medium"><%= user.lastName %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-muted fw-semibold">Telephone</th>
-                    <td><a href="tel:<%= user.phoneNumber %>" class="text-decoration-none"><%= user.phoneNumber %></a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-muted fw-semibold">Email</th>
-                    <td><a href="mailto:<%= user.email %>" class="text-decoration-none"><%= user.email %></a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-muted fw-semibold">Gender</th>
-                    <td><%= user.gender %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-muted fw-semibold">Age</th>
-                    <td><%= user.age %> years old</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-muted fw-semibold">Country</th>
-                    <td><%= user.country %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-muted fw-semibold">Registered Date</th>
-                    <td class="text-muted"><%= moment(user.createdAt).format("YYYY-MM-DD - hh:mm A") %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="text-muted fw-semibold">Last Updated</th>
-                    <td class="text-muted"><%= moment(user.updatedAt).fromNow() %></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="table-responsive-custom">
+            <table class="table table-hover align-middle mb-0 table-bordered">
+              <tbody>
+                <tr>
+                  <th scope="row" style="width: 25%;" class="text-muted fw-semibold">First Name</th>
+                  <td class="fw-medium"><%= user.fireName %></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-muted fw-semibold">Last Name</th>
+                  <td class="fw-medium"><%= user.lastName %></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-muted fw-semibold">Telephone</th>
+                  <td><a href="tel:<%= user.phoneNumber %>" class="text-decoration-none"><%= user.phoneNumber %></a></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-muted fw-semibold">Email</th>
+                  <td><a href="mailto:<%= user.email %>" class="text-decoration-none"><%= user.email %></a></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-muted fw-semibold">Gender</th>
+                  <td><%= user.gender %></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-muted fw-semibold">Age</th>
+                  <td><%= user.age %> years old</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-muted fw-semibold">Country</th>
+                  <td><%= user.country %></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-muted fw-semibold">Registered Date</th>
+                  <td class="text-muted"><%= moment(user.createdAt).format("YYYY-MM-DD - hh:mm A") %></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="text-muted fw-semibold">Last Updated</th>
+                  <td class="text-muted"><%= moment(user.updatedAt).fromNow() %></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>

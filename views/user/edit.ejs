@@ -21,15 +21,14 @@
   </head>
   <body>
     <%- include("../Components/loading.ejs") %> 
-    <%- include('../Components/dark-light.ejs') %>
 
-    <main class="main-layout">
+    <main class="d-flex flex-nowrap">
       <%- include('../Components/sidebar.ejs', {currentPage: "edit"}) %>
 
-      <section class="content-section">
+      <section class="w-100 min-vh-100 d-flex flex-column">
         <%- include('../Components/navbar.ejs') %>
 
-        <div class="page-container">
+        <div class="px-4 py-4" style="max-width: 1100px; width: 100%;">
           <!-- Breadcrumb & Header info -->
           <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
             <nav aria-label="breadcrumb">
@@ -43,122 +42,120 @@
             </div>
           </div>
 
-          <div class="card-box">
-            <div class="border-bottom pb-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
-              <div>
-                <h2 class="h4 fw-bold mb-1">Edit Customer Details</h2>
-                <p class="text-secondary small mb-0">Update information for <%= user.fireName %> <%= user.lastName %></p>
-              </div>
-              <button
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                type="button"
-                class="btn btn-outline-danger btn-sm px-3 rounded-pill"
-              >
-                Delete Customer
-              </button>
+          <div class="border-bottom pb-3 mb-4 d-flex justify-content-between align-items-center flex-wrap gap-2">
+            <div>
+              <h2 class="h4 fw-bold mb-1">Edit Customer Details</h2>
+              <p class="text-secondary small mb-0">Update information for <%= user.fireName %> <%= user.lastName %></p>
+            </div>
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              type="button"
+              class="btn btn-outline-danger btn-sm px-3 rounded-pill"
+            >
+              Delete Customer
+            </button>
+          </div>
+
+          <form action="/edit/<%= user._id %>?_method=PUT" method="post" class="row g-3">
+            <div class="col-12 col-md-6">
+              <label for="inputfirstName4" class="form-label fw-semibold">First Name</label>
+              <input
+                name="fireName"
+                placeholder="First name"
+                type="text"
+                class="form-control py-2"
+                id="inputfirstName4"
+                value="<%= user.fireName %>"
+                required
+              />
             </div>
 
-            <form action="/edit/<%= user._id %>?_method=PUT" method="post" class="row g-3">
-              <div class="col-12 col-md-6">
-                <label for="inputfirstName4" class="form-label fw-semibold">First Name</label>
-                <input
-                  name="fireName"
-                  placeholder="First name"
-                  type="text"
-                  class="form-control py-2"
-                  id="inputfirstName4"
-                  value="<%= user.fireName %>"
-                  required
-                />
-              </div>
+            <div class="col-12 col-md-6">
+              <label for="inputlastName4" class="form-label fw-semibold">Last Name</label>
+              <input
+                name="lastName"
+                placeholder="Last name"
+                type="text"
+                class="form-control py-2"
+                id="inputlastName4"
+                value="<%= user.lastName %>"
+                required
+              />
+            </div>
 
-              <div class="col-12 col-md-6">
-                <label for="inputlastName4" class="form-label fw-semibold">Last Name</label>
-                <input
-                  name="lastName"
-                  placeholder="Last name"
-                  type="text"
-                  class="form-control py-2"
-                  id="inputlastName4"
-                  value="<%= user.lastName %>"
-                  required
-                />
-              </div>
+            <div class="col-12 col-md-6">
+              <label for="inputemail4" class="form-label fw-semibold">Email Address</label>
+              <input
+                name="email"
+                placeholder="Email"
+                type="email"
+                class="form-control py-2"
+                id="inputemail4"
+                value="<%= user.email %>"
+                required
+              />
+            </div>
 
-              <div class="col-12 col-md-6">
-                <label for="inputemail4" class="form-label fw-semibold">Email Address</label>
-                <input
-                  name="email"
-                  placeholder="Email"
-                  type="email"
-                  class="form-control py-2"
-                  id="inputemail4"
-                  value="<%= user.email %>"
-                  required
-                />
-              </div>
+            <div class="col-12 col-md-6">
+              <label for="inputtele4" class="form-label fw-semibold">Phone Number</label>
+              <input
+                name="phoneNumber"
+                placeholder="Phone"
+                type="tel"
+                class="form-control py-2"
+                id="inputtele4"
+                value="<%= user.phoneNumber %>"
+                required
+              />
+            </div>
 
-              <div class="col-12 col-md-6">
-                <label for="inputtele4" class="form-label fw-semibold">Phone Number</label>
-                <input
-                  name="phoneNumber"
-                  placeholder="Phone"
-                  type="tel"
-                  class="form-control py-2"
-                  id="inputtele4"
-                  value="<%= user.phoneNumber %>"
-                  required
-                />
-              </div>
+            <div class="col-12 col-md-4">
+              <label for="inputage4" class="form-label fw-semibold">Age</label>
+              <input
+                name="age"
+                placeholder="Age"
+                type="number"
+                class="form-control py-2"
+                id="inputage4"
+                value="<%= user.age %>"
+                required
+              />
+            </div>
 
-              <div class="col-12 col-md-4">
-                <label for="inputage4" class="form-label fw-semibold">Age</label>
-                <input
-                  name="age"
-                  placeholder="Age"
-                  type="number"
-                  class="form-control py-2"
-                  id="inputage4"
-                  value="<%= user.age %>"
-                  required
-                />
-              </div>
+            <div class="col-12 col-md-4">
+              <label for="inputCountry" class="form-label fw-semibold">Country</label>
+              <% 
+                const countries = ["Egypt", "Morocco", "Saudi Arabia", "UAE", "Tunisia", "Algeria", "Jordan", "Lebanon", "Palestine", "Iraq", "Syria", "Yemen", "Kuwait", "Qatar", "Oman", "Bahrain", "Libya", "Sudan"]; 
+              %>
+              <select name="country" id="inputCountry" class="form-select py-2">
+                <option disabled>Choose country...</option>
+                <% countries.forEach(country => { %>
+                  <option value="<%= country %>" <%= user.country === country ? 'selected' : '' %>>
+                    <%= country %>
+                  </option>
+                <% }) %>
+              </select>
+            </div>
 
-              <div class="col-12 col-md-4">
-                <label for="inputCountry" class="form-label fw-semibold">Country</label>
-                <% 
-                  const countries = ["Egypt", "Morocco", "Saudi Arabia", "UAE", "Tunisia", "Algeria", "Jordan", "Lebanon", "Palestine", "Iraq", "Syria", "Yemen", "Kuwait", "Qatar", "Oman", "Bahrain", "Libya", "Sudan"]; 
-                %>
-                <select name="country" id="inputCountry" class="form-select py-2">
-                  <option disabled>Choose country...</option>
-                  <% countries.forEach(country => { %>
-                    <option value="<%= country %>" <%= user.country === country ? 'selected' : '' %>>
-                      <%= country %>
-                    </option>
-                  <% }) %>
-                </select>
-              </div>
+            <div class="col-12 col-md-4">
+              <label for="inputGender" class="form-label fw-semibold">Gender</label>
+              <select name="gender" id="inputGender" class="form-select py-2">
+                <option disabled>Choose gender...</option>
+                <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
+                <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
+              </select>
+            </div>
 
-              <div class="col-12 col-md-4">
-                <label for="inputGender" class="form-label fw-semibold">Gender</label>
-                <select name="gender" id="inputGender" class="form-select py-2">
-                  <option disabled>Choose gender...</option>
-                  <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
-                  <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
-                </select>
-              </div>
-
-              <div class="col-12 pt-3 border-top mt-4 d-flex flex-wrap gap-2">
-                <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill fw-medium">
-                  Update Changes
-                </button>
-                <a href="/home" class="btn btn-outline-secondary px-4 py-2 rounded-pill">
-                  Cancel
-                </a>
-              </div>
-            </form>
-          </div>
+            <div class="col-12 pt-3 border-top mt-4 d-flex flex-wrap gap-2">
+              <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill fw-medium">
+                Update Changes
+              </button>
+              <a href="/home" class="btn btn-outline-secondary px-4 py-2 rounded-pill">
+                Cancel
+              </a>
+            </div>
+          </form>
         </div>
 
         <!-- Delete Modal -->
