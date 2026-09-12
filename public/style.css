@@ -1,4 +1,4 @@
-/* 1. استيراد خط Google Sans Flex من جوجل كاحتياط */
+/* 1. استيراد خط Google Sans Flex كاحتياط */
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,100..1000&display=swap');
 
 /* 2. تعريف الخط المحلي الموجود في مجلد public */
@@ -24,7 +24,8 @@ body {
   font-family: 'Google Sans Flex', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   padding: 0;
   margin: 0;
-  background-color: #0f172a;
+  background-color: #212529;
+  color: #f8fafc;
 }
 
 .container {
@@ -37,15 +38,15 @@ body {
 }
 
 .form {
-  background-color: #1e293b; /* بطاقة النموذج بلون سلايت عصري */
+  background-color: #2b3035; /* استخدام اللون الرئيسي 2b3035 بدلاً من 0f172a */
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  padding: 2rem;
+  padding: 2.25rem 2rem;
   width: 100%;
   max-width: 380px;
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
 }
 
@@ -64,10 +65,10 @@ body {
 
 .input-container input {
   font-family: inherit;
-  background-color: #0f172a; /* حقول إدخال داكنة متناسقة */
+  background-color: #212529;
   color: #f1f5f9;
   outline: none;
-  border: 1px solid #334155;
+  border: 1px solid #495057;
   padding: 0.85rem 1rem;
   font-size: 0.95rem;
   width: 100%;
@@ -76,18 +77,18 @@ body {
 }
 
 .input-container input::placeholder {
-  color: #64748b;
+  color: #adb5bd;
 }
 
 .input-container input:focus {
-  border-color: #6366f1; /* توهج بنفسجي أنيق عند التركيز */
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
 }
 
 .submit {
   display: block;
   padding: 0.85rem 1.25rem;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  background: #0d6efd;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 600;
@@ -97,15 +98,15 @@ body {
   border-radius: 0.6rem;
   cursor: pointer;
   letter-spacing: 0.5px;
-  /* box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35); */
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.35);
   transition: all 0.2s ease;
   margin-top: 0.5rem;
 }
 
 .submit:hover {
-  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  background: #0b5ed7;
   transform: translateY(-1px);
-  /* box-shadow: 0 6px 16px rgba(79, 70, 229, 0.45); */
+  box-shadow: 0 6px 16px rgba(13, 110, 253, 0.45);
 }
 
 .submit:active {
@@ -119,20 +120,20 @@ body {
 }
 
 .signup-link {
-  color: #94a3b8;
+  color: #adb5bd;
   font-size: 0.875rem;
   text-align: center;
   margin-top: 0.5rem;
 }
 
 .signup-link a {
-  color: #818cf8;
+  color: #6ea8fe;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .signup-link a:hover {
-  color: #a5b4fc;
+  color: #9ec5fe;
   text-decoration: underline;
 }

@@ -46,11 +46,26 @@
   font-family: bootstrap-icons !important;
 }
 
+/* 5. Flexbox overflow fix to ensure fluid responsiveness on small screens */
+main.d-flex > section {
+  flex: 1 1 0%;
+  min-width: 0;
+  max-width: 100%;
+}
+
 /* Responsive Table Wrapper without forcing rounded corners or white background */
 .table-responsive-custom {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   width: 100%;
+}
+
+/* Prevent white color in the header of table/elements - harmonize with #2b3035 */
+[data-bs-theme="dark"] thead,
+[data-bs-theme="dark"] thead th {
+  background-color: #2b3035 !important;
+  color: #f8fafc !important;
+  border-color: #373b3e !important;
 }
 
 /* SIDEBAR */
