@@ -23,9 +23,6 @@ router.get("/login", (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    if (req.cookies && req.cookies.status === "signed") {
-      return res.redirect("/home");
-    }
     const check = await AuthUser.findOne({ userName: req.body.userName });
     if (!check) {
       return res.send("This username does not exist! Try another name.");
@@ -103,6 +100,7 @@ router.get("/home", async (req, res) => {
       res.clearCookie("userId");
       return res.redirect("/login");
     }
+    
     res.render("index", { arr: result, user: user });
   } catch (error) {
     console.log(error);
@@ -110,9 +108,7 @@ router.get("/home", async (req, res) => {
   }
 });
 
-router.get("/user/add", (req, res) => {
-  res.render("user/add");
-});
+
 
 router.get("/edit/:id", async (req, res) => {
   try {
@@ -142,7 +138,11 @@ router.get("/view/:id", async (req, res) => {
   }
 });
 
-// POST Requst
+// Add User Route
+router.get("/user/add", (req, res) => {
+  res.render("user/add");
+});
+
 router.post("/user/add", (req, res) => {
 
   const user = new User(req.body);
@@ -156,8 +156,8 @@ router.post("/user/add", (req, res) => {
     });
 });
 
-// search 
-// POST Requst
+// SEARCH
+
 router.post("/search", (req, res) => {
   const searchText = (req.body.searchText || "").trim();
   if (!searchText) {
@@ -184,7 +184,7 @@ router.post("/search", (req, res) => {
     });
 });
 
-// PUT Request
+// EDIT
 router.put("/edit/:id", async (req, res) => {
   try {
     const id = req.params.id;
