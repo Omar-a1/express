@@ -91,10 +91,22 @@ router.get("/logout", (req, res) => {
 router.get("/home", async (req, res) => {
   try {
     const result = await User.find();
-    res.render("index", { arr: result });
-    // console.log(result)
+    
+    if (!req.cookies.userId) {
+      res.clearCookie("status");
+      res.clearCookie("userId");
+      return res.redirect("/login");
+    }
+    const user = await AuthUser.findById(req.cookies.userId);
+    if (!user) {
+      res.clearCookie("status");
+      res.clearCookie("userId");
+      return res.redirect("/login");
+    }
+    res.render("index", { arr: result, user: user });
   } catch (error) {
     console.log(error);
+    res.render("user/error", { err: "Failed to get home page" });
   }
 });
 

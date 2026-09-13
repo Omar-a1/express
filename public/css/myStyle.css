@@ -53,6 +53,13 @@ main.d-flex > section {
   max-width: 100%;
 }
 
+/* Ensure bottom space on mobile so bottom navigation rail doesn't overlap content or action buttons */
+@media (max-width: 767.98px) {
+  main.d-flex > section {
+    padding-bottom: 80px;
+  }
+}
+
 /* Responsive Table Wrapper without forcing rounded corners or white background */
 .table-responsive-custom {
   overflow-x: auto;
